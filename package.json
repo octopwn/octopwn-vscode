@@ -1,0 +1,87 @@
+{
+  "name": "octopwn-extension",
+  "displayName": "OctoPwn Extension",
+  "description": "Provides stubs and IntelliSense for OctoPwn framework with plugin execution support",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/octopwn/octopwn-vscode.git"
+  },
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets",
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:octopwn.configurePythonStubs",
+    "onCommand:octopwn.runPlugin",
+    "onLanguage:python"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "octopwn.configurePythonStubs",
+        "title": "OctoPwn: Configure Python Stubs"
+      },
+      {
+        "command": "octopwn.runPlugin",
+        "title": "OctoPwn: Run Plugin"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "when": "resourceExtname == .py",
+          "command": "octopwn.runPlugin",
+          "group": "navigation"
+        }
+      ],
+      "editor/context": [
+        {
+          "when": "resourceExtname == .py",
+          "command": "octopwn.runPlugin",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "OctoPwn",
+      "properties": {
+        "octopwn.binaryPath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to the OctoPwn binary"
+        },
+        "octopwn.licensePath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to the OctoPwn license file"
+        },
+        "octopwn.extraFilesPath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to extra files for OctoPwn"
+        },
+        "octopwn.enableStubs": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically configure Python stubs for OctoPwn"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "echo 'Preparing for publish'",
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "devDependencies": {
+    "@types/node": "^16.18.126",
+    "@types/vscode": "^1.60.0",
+    "vsce": "^2.15.0"
+  }
+}
